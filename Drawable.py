@@ -1,5 +1,9 @@
 class Drawable:
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         pass
-    def draw(self):
+        
+    def update(self, *args, **kwargs):
+        pass
+        
+    def draw(self, *args, **kwargs):
         pass
