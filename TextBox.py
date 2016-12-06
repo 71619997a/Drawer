@@ -12,7 +12,9 @@ class TextBox(Drawable):
         self.s += s
     
     def draw(self):
-        # textFont(self.ft) 
-        stroke(self.col)
-        text(self.x, self.y, self.s)
+        # if self.ft != 0: 
+        #     textFont(self.ft, 24) 
+        fill(self.col)
+        text(self.s, self.x, self.y)
+        print self.s, self.x, self.y
         

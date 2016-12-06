@@ -9,6 +9,7 @@ insmode = RECTANG
 def setup():
     size(200, 200)
     background(255)
+    # textFont(loadFont('Cambria-24.vlw'), 24)
 
 def draw():
     background(255)
@@ -17,19 +18,22 @@ def draw():
         entities[-1].update(mouseX, mouseY)
     for ent in entities:
         ent.draw()
-    # print entities
+    print entities
     
-def mouseClicked():
+def mousePressed():
     global mode
-    if mode == insmode: mode = IDLE
-    elif mode == IDLE: 
+    if mode == RECTANG:  # ending rectangle
+        mode = IDLE
+    elif mode == TEXT:  # new text box
+        entities.append(TextBox(mouseX, mouseY, ''))
+    else: # mode == IDLE
         mode = insmode
-        if mode == RECTANG:
+        if mode == RECTANG:  # beginning rectangle
             entities.append(Rectangle(mouseX, mouseY, mouseX, mouseY))
-        elif mode == TEXT:
-            entities.append(TextBox(mouseX, mouseY, ''))
+            
         
 def keyPressed():
+    global mode
     if mode == TEXT:
         entities[-1].update(key)
 
