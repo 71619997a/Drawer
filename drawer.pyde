@@ -4,12 +4,14 @@ entities = []
 IDLE = -1
 RECTANG = 0
 TEXT = 1
-mode = IDLE
+mode = TEXT
 insmode = RECTANG
+basefont = 0
 def setup():
+    global basefont
     size(200, 200)
     background(255)
-    # textFont(loadFont('Cambria-24.vlw'), 24)
+    basefont = loadFont('Cambria-24.vlw')
 
 def draw():
     background(255)
