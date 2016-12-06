@@ -15,3 +15,6 @@ class Eraser(Drawable):
         y=self.y
         line(x-15, y, x+15, y)
         line(x, y-15, x, y+15)
+        
+    def collides(self, x, y):
+        return False

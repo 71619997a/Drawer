@@ -1,4 +1,5 @@
 from Drawable import Drawable
+from utils import between
 
 class Rectangle(Drawable):
     def __init__(self, x1, y1, x2, y2, border=0, filler=color(255, 255, 255, 0)):
@@ -18,4 +19,5 @@ class Rectangle(Drawable):
         fill(self.filler)
         rect(self.x1, self.y1, self.x2 - self.x1, self.y2 - self.y1)
         
-        
+    def collides(self, x, y):
+        return between(self.x1, x, self.x2) and between(self.y1, y, self.y2)

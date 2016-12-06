@@ -1,23 +1,25 @@
 from Rectangle import Rectangle
 from TextBox import TextBox
+from setup import setup as setupall
+
 entities = []
 IDLE = -1
 RECTANG = 0
 TEXT = 1
+ERASING = 2
 mode = TEXT
 insmode = RECTANG
-basefont = 0
+
 def setup():
-    global basefont
     size(200, 200)
     background(255)
-    basefont = loadFont('Cambria-24.vlw')
+    setupall()
 
 def draw():
     background(255)
     fill(255, 255, 255, 0)
     if mode == RECTANG:
-        entities[-1].update(mouseX, mouseY)
+        updent(mouseX, mouseY)
     for ent in entities:
         ent.draw()
     print entities
@@ -28,6 +30,11 @@ def mousePressed():
         mode = IDLE
     elif mode == TEXT:  # new text box
         entities.append(TextBox(mouseX, mouseY, ''))
+    elif mode == ERASING:
+        for i in range(len(entities) - 2, -1, -1):  # start from latest entity, not including eraser itself
+            if entities[i].collides(mouseX, mouseY):
+                del entities[i]
+                break
     else: # mode == IDLE
         mode = insmode
         if mode == RECTANG:  # beginning rectangle
@@ -37,7 +44,10 @@ def mousePressed():
 def keyPressed():
     global mode
     if mode == TEXT:
-        entities[-1].update(key)
+        updent(key)
 
+def updent(*args, **kwargs):
+    if len(entities):
+        entities[-1].update(*args, **kwargs)
 
     
